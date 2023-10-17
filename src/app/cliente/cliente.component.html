@@ -1,0 +1,135 @@
+
+<section class="content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                <div class="card-header border-0">
+                  <h3 class="card-title">Cliente</h3>
+              </div>
+                <div class="card-body">
+                  <form #clienteForm="ngForm">
+                    <div class="modal-body">
+                        <div class="row pl-2 pr-2">
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label><b class="text-danger">*</b> Nombres</label>
+                                    <input type="text" class="form-control disabled" required name="nombres" [(ngModel)]="cliente.nombres" onkeydown="return /[a-z, ]/i.test(event.key)" />
+                                </div>
+                                <div class="form-group">
+                                  <label><b class="text-danger">*</b> Apellido Materno</label>
+                                  <input type="text" class="form-control disabled" required name="apellidoMaterno" [(ngModel)]="cliente.apellidoMaterno" onkeydown="return /[a-z, ]/i.test(event.key)">
+                              </div>
+                                <div class="form-group">
+                                    <label><b class="text-danger">*</b> Apellido Paterno</label>
+                                    <input type="text" class="form-control disabled" required name="apellidoPaterno" [(ngModel)]="cliente.apellidoPaterno" onkeydown="return /[a-z, ]/i.test(event.key)">
+                                </div>
+
+                                <br>
+                                <div class="form-row">
+                                  <label>Sexo</label>
+                                  <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  value="Masculino" [(ngModel)]="sexo">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        Masculino
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Femenino" [(ngModel)]="sexo">
+                                      <label class="form-check-label" for="flexRadioDefault2">
+                                        Femenino
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+
+
+                              <div class="form-group">
+                                  <label><b class="text-danger">*</b> Nombres</label>
+                                  <input type="date" class="form-control disabled" required name="fechaNacimiento" [(ngModel)]="cliente.fechaNacimiento">
+                              </div>
+                              <div class="form-group">
+                                <label><b class="text-danger">*</b> Dirección</label>
+                                <input type="text" class="form-control disabled" required name="direccion" [(ngModel)]="cliente.direccion">
+                            </div>
+                              <div class="form-group">
+                                  <label><b class="text-danger">*</b> Correo Eletrónico</label>
+                                  <input type="email" class="form-control disabled" required name="correo" [(ngModel)]="cliente.correo"
+                                  #correo="ngModel"
+                                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                  [ngClass]="{'is-invalid animated shake': correo.invalid && correo.touched}"
+                                  >
+                              </div>
+
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6" >
+                        <button class="btn btn-primary pad" role="button" (click)='create()' *ngIf="!cliente.id" >Crear</button>
+                        <button class="btn btn-primary pad " role="button" (click)='update()' [disabled]="!clienteForm.form.valid">Editar</button>
+                        <button class="btn btn-danger" role="button" (click)='delete(cliente.id)' [disabled]="!clienteForm.form.valid">Eliminar</button>
+
+                      </div>
+                    </div>
+                </form>
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header border-0">
+                          <h3 class="card-title">Lista de clientes</h3>
+                      </div>
+                      <div class="card-body table-responsive p-0">
+                          <table class="table" id="tableWorker">
+                              <thead>
+                                  <tr>
+                                      <th>Nombres</th>
+                                      <th>Apellido Paterno</th>
+                                      <th>Apellido Materno</th>
+                                      <th>Fecha Nacimiento</th>
+                                      <th>Sexo</th>
+                                      <th>Direccion</th>
+                                      <th>Correo</th>
+                                      <th>Acciones</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let cliente of clientes">
+                                      <td>{{cliente.nombres}}</td>
+                                      <td>{{cliente.apellidoMaterno}}</td>
+                                      <td>{{cliente.apellidoPaterno}}</td>
+                                      <td>{{cliente.fechaNacimiento}}</td>
+                                      <td>{{cliente.sexo}}</td>
+                                      <td>{{cliente.direccion}}</td>
+                                      <td>{{cliente.correo}}</td>
+                                      <button type="button" class="btn btn-outline-warning" (click)="selectCliente(cliente.id)">Seleccionar<i class="fa fa-edit"></i></button>
+
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+  </div>
+</section>
+
+
